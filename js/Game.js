@@ -1,18 +1,18 @@
 class Game {
-    constructor(missed = 0, phrases, activePhrase = null) {
-        this.missed = missed;
+    constructor() {
+        this.missed = 0;
         this.phrases = [
-            'Quality Time',
-            'Knock Your Socks Off',
-            'What Goes Up Must Come Down',
-            'Just keep swimming',
-            'May the Force be with you',
-            // 'Houston, we have a problem',
-            // // 'There\'s is no place like home',
-            // // 'You\'re gonna need a bigger boat',
-            // // 'Keep your friends close, but your enemies closer'
+            new Phrase('Quality Time'),
+            new Phrase('Knock Your Socks Off'),
+            new Phrase('What Goes Up Must Come Down'),
+            new Phrase('Just keep swimming'),
+            new Phrase('May the Force be with you'),
+            new Phrase('Houston, we have a problem'),
+            new Phrase('There\'s is no place like home'),
+            new Phrase('You\'re gonna need a bigger boat'),
+            new Phrase('Keep your friends close, but your enemies closer')
         ];
-        this.activePhrase = activePhrase;
+        this.activePhrase = null;
     }
 
 
@@ -24,6 +24,7 @@ class Game {
         this.activePhrase = this.getRandomPhrase();
         const phrase = new Phrase(this.activePhrase);
         phrase.addPhraseToDisplay();
+        // console.log(this.activePhrase);
 
     }
 
@@ -38,6 +39,7 @@ class Game {
         return randomPhrase;
     }
 
+
     /**
      * Check if button clicked by player matches anything in the activePhrase, then directs game based on result
      * @param {object} - The event object
@@ -45,11 +47,13 @@ class Game {
     handleInteraction(e) {
         
         const event = e.target;
+
+        this.phrase.checkLetter();
         
         if (event.tagName === 'BUTTON') {
             console.log(event.textContent);
             event.disabled = true;
-            event.classList.add('wrong')
+            event.classList.add('wrong');
         }
         
         // disable selected letter's onscreen keyboard button

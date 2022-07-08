@@ -1,18 +1,19 @@
 
-// /*
+
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
     }
-// */
+
 
     
     /**
      * Display blank box placeholders on page representing the characters in the phrase 
      */
     addPhraseToDisplay() {
-        const chars = this.phrase.split('');
-        console.log(chars);
+        // const chars = this.phrase.split('');
+
+        console.log(this.phrase);
 
         // create a list item for each letter
         const phraseUL = document.querySelector('#phrase ul');
@@ -39,7 +40,7 @@ class Phrase {
     /**
      * Check to see if guessed letter matches any letter in the phrase 
      */
-    checkLetter(letter) { 
+    checkLetter() { 
         console.log(game.activePhrase);
     }
         // search the phrase for a matching letter

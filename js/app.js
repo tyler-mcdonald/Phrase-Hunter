@@ -1,20 +1,7 @@
 
-/** 
- * when Start Game button is clicked:
- * 
 
- * 
- * 
- * when user clicks a letter
- *      if letter exists in the phrase
- *          display all matching letters in the phrase
- *      else if letter does not exist
- *          remove a heart from the player
- * 
- * when phrase has been revealed
- *      end game
- * */ 
 const game = new Game();
+// console.log(game.phrases[0]);
 
 document.querySelector('#overlay button').addEventListener('click', function () {
     game.startGame();
@@ -28,7 +15,6 @@ document.querySelector('#overlay button').addEventListener('click', function () 
 document.querySelector('#qwerty').addEventListener('click', function (e) {
     
     game.handleInteraction(e);
-    
 })
 
 
@@ -36,3 +22,4 @@ document.querySelector('#qwerty').addEventListener('click', function (e) {
 /** Testing */
 // const phrase = new Phrase('Hello');
 // phrase.addPhraseToDisplay();
+// game.getRandomPhrase.addPhraseToDisplay();
