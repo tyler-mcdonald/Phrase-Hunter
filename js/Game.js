@@ -2,15 +2,16 @@ class Game {
     constructor() {
         this.missed = 0;
         this.phrases = [
-            new Phrase('Quality Time'),
-            new Phrase('Knock Your Socks Off'),
-            new Phrase('What Goes Up Must Come Down'),
-            new Phrase('Just keep swimming'),
-            new Phrase('May the Force be with you'),
-            new Phrase('Houston, we have a problem'),
-            new Phrase('There\'s is no place like home'),
-            new Phrase('You\'re gonna need a bigger boat'),
-            new Phrase('Keep your friends close, but your enemies closer')
+            new Phrase('A'),
+            // new Phrase('Quality Time'),
+            // new Phrase('Knock Your Socks Off'),
+            // new Phrase('What Goes Up Must Come Down'),
+            // new Phrase('Just keep swimming'),
+            // new Phrase('May the Force be with you'),
+            // new Phrase('Houston, we have a problem'),
+            // new Phrase('There\'s is no place like home'),
+            // new Phrase('You\'re gonna need a bigger boat'),
+            // new Phrase('Keep your friends close, but your enemies closer')
         ];
         this.activePhrase = null;
     }
@@ -18,14 +19,16 @@ class Game {
 
     /**
      * Selects a random phrase and adds it to the board
+     * Hides start screen overlay
      */
     startGame() {
         
         this.activePhrase = this.getRandomPhrase();
-        const phrase = new Phrase(this.activePhrase);
-        phrase.addPhraseToDisplay();
-        // console.log(this.activePhrase);
+        this.activePhrase.addPhraseToDisplay();
+        document.querySelector('#overlay').style.visibility = 'hidden'; 
 
+        // helper
+        console.log(this.activePhrase);
     }
 
 
@@ -35,7 +38,6 @@ class Game {
     getRandomPhrase() {
         const random = Math.floor((Math.random() * this.phrases.length));
         const randomPhrase = this.phrases[random];
-        // const phrase = new Phrase(randomPhrase);
         return randomPhrase;
     }
 
@@ -46,44 +48,48 @@ class Game {
      */
     handleInteraction(e) {
         
-        const event = e.target;
-
-        this.phrase.checkLetter();
+        const button = e.target;
+        const chosenLetter = button.textContent;
+        const isMatch = this.activePhrase.checkLetter(chosenLetter);
         
-        if (event.tagName === 'BUTTON') {
-            console.log(event.textContent);
-            event.disabled = true;
-            event.classList.add('wrong');
+        if (button.tagName === 'BUTTON') {
+            button.disabled = true;
+            if (isMatch) {
+                button.classList.add('chosen');
+                this.activePhrase.showMatchedLetter(chosenLetter);
+                this.checkForWin();
+            } else  { 
+                button.classList.add('wrong');
+                this.removeLife();
+            }
         }
-        
-        // disable selected letter's onscreen keyboard button
-            // if phrase does not include letter
-                // add class 'wrong' to the letter
-                // call removeLife()
-            // if phrase includes letter
-                // add classs 'chosen' to the letter
-                // call showMatchedLetter()
-                // call checkForWin()
-                    // if win
-                        // call gameOver()
+        console.log(this.countHiddenLetters());
     }
 
 
-
-
-
-
-
-
+    countHiddenLetters() {
+        let count = 0;
+        const phrase = document.querySelectorAll('#phrase li');
+        phrase.forEach(letter => {
+            if (letter.classList.contains('hide')) {
+                count += 1;
+            }
+        });
+        return count;
+    }
 
 
     /**
      * Removes one life from the scoreboard if letter guessed is not in the active phrase
      */
     removeLife() {
-        // remove liveHeart.png
-        // add lostHeart.png
-        // increments 'missed' property
+        const hearts = document.querySelectorAll('#scoreboard img');
+        const lostHeart = hearts[this.missed];
+        lostHeart.src = 'images/lostHeart.png';
+        this.missed += 1;
+        if (this.missed === 5) {
+            this.gameOver();
+        }
     }
 
 
@@ -91,7 +97,11 @@ class Game {
      * Checks to see if all letters the phrase have been revealed
      */
     checkForWin() {
-
+        // keep track of how many letters remain to be guessed
+        if (this.countHiddenLetters() === 0) {
+            this.gameOver();
+        }
+        return true;   
     }
 
 
@@ -99,8 +109,19 @@ class Game {
      * Displays original start screen overlay, and a winning/losing message to the user
      */
     gameOver() {
+        console.log('game over');
         // display original start screen
-        // replace overlay h1 element with 'win' or 'loss' message
-        // replace overlay's 'start' class with class 'win' or 'lose'
+        const endScreen = document.querySelector('#overlay');
+        const endMessage = endScreen.querySelector('h2');
+        endScreen.style.visibility = 'visible';
+        
+        if (this.countHiddenLetters() === 0) {
+            endScreen.classList.add('win');
+            endMessage.textContent = 'You win!!!'
+
+        } else {
+            endScreen.classList.add('lose');
+            endMessage.textContent = 'Sorry, you lost.'
+        }
     }
 }

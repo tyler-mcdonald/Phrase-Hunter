@@ -6,19 +6,16 @@ class Phrase {
     }
 
 
-    
     /**
      * Display blank box placeholders on page representing the characters in the phrase 
      */
     addPhraseToDisplay() {
-        // const chars = this.phrase.split('');
-
-        console.log(this.phrase);
+        const chars = this.phrase.split('');
 
         // create a list item for each letter
         const phraseUL = document.querySelector('#phrase ul');
         chars.forEach(char => {
-            
+
             const li = document.createElement('li');
             li.textContent = char;
             if (char === ' ') {
@@ -31,7 +28,6 @@ class Phrase {
                 li.classList.add(char);
             }
             
-
             phraseUL.appendChild(li);
         })
     }
@@ -40,29 +36,26 @@ class Phrase {
     /**
      * Check to see if guessed letter matches any letter in the phrase 
      */
-    checkLetter() { 
-        console.log(game.activePhrase);
+    checkLetter(letter) {
+        const regex = new RegExp(`[${this.phrase}]`,'g');
+        const isMatch = regex.test(letter);
+        return isMatch;
     }
-        // search the phrase for a matching letter
-        
-        // if a letter matches
-            // return true
-        // if no match
-            // return false
-    
         
     
-    // nameInput: () => {
-    //     const nameValue = nameInput.value;
-    //     const nameIsValid = /\s*[^\s]+\s*/.test(nameValue); // name cannot be blank
-    //     return nameIsValid;
-    // }, 
-
-
     /**
      * Reveal all matched letters from player's selection
      */
-    showMatchedLetter() {
+    showMatchedLetter(matchedLetter) {
         /** Show letters by replacing class 'hide' with 'show' */
+        const phraseLetters = document.querySelectorAll('#phrase li');
+
+        // Add 'show' class to matched letter
+        for (let letter of phraseLetters) {
+            if (letter.textContent === matchedLetter) {
+                letter.classList.add('show');
+                letter.classList.remove('hide');
+            }
+        }
     }
 }
