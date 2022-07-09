@@ -11,7 +11,11 @@ document.querySelector('#btn__reset').addEventListener('click', function () {
 // /**
 // Click event for keyboard display buttons
 document.querySelector('#qwerty').addEventListener('click', function (e) {
-    game.handleInteraction(e.target);
+    
+    if (e.target.tagName === 'BUTTON') {
+        game.handleInteraction(e.target);
+    }
+    
 })
 // */
 

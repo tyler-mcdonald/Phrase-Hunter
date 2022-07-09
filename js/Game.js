@@ -3,7 +3,7 @@ class Game {
         this.missed = 0;
         this.phrases = [
             // new Phrase('Quality Time'),
-            new Phrase('A'),
+            new Phrase('Abc'),
             // new Phrase('Knock Your Socks Off'),
             // new Phrase('What Goes Up Must Come Down'),
             // new Phrase('Just keep swimming'),
@@ -46,16 +46,14 @@ class Game {
         const chosenLetter = button.textContent;
         const isMatch = this.activePhrase.checkLetter(chosenLetter);
         
-        if (button.tagName === 'BUTTON') {
-            button.disabled = true;
-            if (isMatch) {
-                button.classList.add('chosen');
-                this.activePhrase.showMatchedLetter(chosenLetter);
-                this.checkForWin();
-            } else  { 
-                button.classList.add('wrong');
-                this.removeLife();
-            }
+        button.disabled = true;
+        if (isMatch) {
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(chosenLetter);
+            this.checkForWin();
+        } else  { 
+            button.classList.add('wrong');
+            this.removeLife();
         }
     }
 
@@ -111,7 +109,7 @@ class Game {
         
         if (this.countHiddenLetters() === 0) {
             endScreen.classList.add('win');
-            gameOverMessage.textContent = `${this.activePhrase.phraseNormal}`;
+            gameOverMessage.textContent = `${this.activePhrase.phrase}`;
             endMessage.textContent = 'You win!!!';
         } else {
             endScreen.classList.add('lose');
@@ -142,6 +140,10 @@ class Game {
         // clear previous phrase
         const phrase = document.querySelectorAll('#phrase li');
         phrase.forEach(phrase => phrase.remove());
+
+        // clear start screen overlay
+        document.querySelector('#overlay').classList.remove('win', 'lose');
+
     }
     // */
 }
