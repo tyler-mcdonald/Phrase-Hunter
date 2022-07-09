@@ -2,8 +2,8 @@ class Game {
     constructor() {
         this.missed = 0;
         this.phrases = [
-            new Phrase('A'),
             // new Phrase('Quality Time'),
+            new Phrase('A'),
             // new Phrase('Knock Your Socks Off'),
             // new Phrase('What Goes Up Must Come Down'),
             // new Phrase('Just keep swimming'),
@@ -18,17 +18,12 @@ class Game {
 
 
     /**
-     * Selects a random phrase and adds it to the board
-     * Hides start screen overlay
+     * Selects random phrase; hides start screen overlay
      */
     startGame() {
-        
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
         document.querySelector('#overlay').style.visibility = 'hidden'; 
-
-        // helper
-        console.log(this.activePhrase);
     }
 
 
@@ -46,9 +41,8 @@ class Game {
      * Check if button clicked by player matches anything in the activePhrase, then directs game based on result
      * @param {object} - The event object
      */
-    handleInteraction(e) {
+    handleInteraction(button) {
         
-        const button = e.target;
         const chosenLetter = button.textContent;
         const isMatch = this.activePhrase.checkLetter(chosenLetter);
         
@@ -113,15 +107,42 @@ class Game {
         // display original start screen
         const endScreen = document.querySelector('#overlay');
         const endMessage = endScreen.querySelector('h2');
+        const gameOverMessage = document.querySelector('#game-over-message');
         endScreen.style.visibility = 'visible';
         
         if (this.countHiddenLetters() === 0) {
             endScreen.classList.add('win');
-            endMessage.textContent = 'You win!!!'
-
+            gameOverMessage.textContent = `${this.activePhrase.phraseNormal}`;
+            endMessage.textContent = 'You win!!!';
         } else {
             endScreen.classList.add('lose');
-            endMessage.textContent = 'Sorry, you lost.'
+            endMessage.textContent = 'GAME OVER';
+            // endMessage.firstElementChild.textContent = 'Try again!';
+            gameOverMessage.textContent = 'Try again';
         }
     }
+
+    // /**
+    resetGame() {
+
+        // reset lives
+        this.missed = 0;
+
+        // reset hearts display
+        const hearts = document.querySelectorAll('#scoreboard img');
+        hearts.forEach(heart => heart.src = 'images/liveHeart.png');
+
+        // clear keyboard
+        const keyboardButtons = document.querySelectorAll('#qwerty button');
+        keyboardButtons.forEach(button => {
+            button.classList.remove('chosen');
+            button.classList.remove('wrong');
+            button.disabled = false;
+        });
+
+        // clear previous phrase
+        const phrase = document.querySelectorAll('#phrase li');
+        phrase.forEach(phrase => phrase.remove());
+    }
+    // */
 }

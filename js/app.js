@@ -1,24 +1,31 @@
 
-const game = new Game();
 
-document.querySelector('#overlay button').addEventListener('click', function () {
-    game.startGame();
+let game = null;
+
+document.querySelector('#btn__reset').addEventListener('click', function () {
+    game = new Game();
+    game.resetGame();
+    game.startGame(); 
 })
 
+// /**
 // Click event for keyboard display buttons
 document.querySelector('#qwerty').addEventListener('click', function (e) {
-    
-    game.handleInteraction(e);
+    game.handleInteraction(e.target);
 })
+// */
 
 
 
 
-/**
-document.querySelector('#qwerty').addEventListener('keydown', function (e) {
-    
-    if (e.target.tagName ==='BUTTON')
-    console.log(e.target.key);
-    // game.handleInteraction(e.key);
-})
+
+// /**
+document.addEventListener('keydown', function (e) {
+    const keyboardButtons = document.querySelectorAll('#qwerty button');
+    for (let button of keyboardButtons) {
+        if (button.textContent === e.key) {
+            game.handleInteraction(button);
+        }
+    }
+});
 //  */
