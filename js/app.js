@@ -16,9 +16,6 @@ document.querySelector('#qwerty').addEventListener('click', function (e) {
 // */
 
 
-
-
-
 // /**
 document.addEventListener('keydown', function (e) {
     const keyboardButtons = document.querySelectorAll('#qwerty button');

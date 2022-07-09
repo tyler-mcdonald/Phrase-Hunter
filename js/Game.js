@@ -28,7 +28,7 @@ class Game {
 
 
     /**
-     * Selects a random phrase in the phrases array and returns it
+     * @return {object} Random phrase object
      */
     getRandomPhrase() {
         const random = Math.floor((Math.random() * this.phrases.length));
@@ -38,8 +38,8 @@ class Game {
 
 
     /**
-     * Check if button clicked by player matches anything in the activePhrase, then directs game based on result
-     * @param {object} - The event object
+     * @param {object} element The event target element.
+     * Checks if chosen letter exists in phrase and updates game
      */
     handleInteraction(button) {
         
@@ -57,7 +57,6 @@ class Game {
                 this.removeLife();
             }
         }
-        console.log(this.countHiddenLetters());
     }
 
 
