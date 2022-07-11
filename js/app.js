@@ -1,5 +1,6 @@
 let game = null;
 
+/** Click event for start button */
 document.querySelector('#btn__reset').addEventListener('click', function () {
     game = new Game();
     game.resetGame();

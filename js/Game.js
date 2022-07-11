@@ -7,6 +7,11 @@ class Game {
             new Phrase('What Goes Up Must Come Down'),
             new Phrase('Just keep swimming'),
             new Phrase('May the Force be with you'),
+            new Phrase('Curiosity Killed The Cat'),
+            new Phrase('There is no I in team'),
+            new Phrase('Down for the count'),
+            new Phrase('Elephant in the room'),
+            new Phrase('Early bird gets the worm'),
             // new Phrase('Houston, we have a problem'),
             // new Phrase('There\'s is no place like home'),
             // new Phrase('You\'re gonna need a bigger boat'),
@@ -23,6 +28,7 @@ class Game {
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
         document.querySelector('#overlay').style.visibility = 'hidden'; 
+        console.log(this.activePhrase);
     }
 
 
@@ -119,7 +125,7 @@ class Game {
             gameOverMessage.textContent = 'Try again';
         } else {
             overlay.classList.add('win');
-            gameOverMessage.textContent = `${this.activePhrase.phrase}`;
+            gameOverMessage.textContent = `${this.activePhrase.phraseDisplay}`;
             endMessage.textContent = 'You win!!!';
         }
     }
