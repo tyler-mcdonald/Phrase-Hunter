@@ -4,9 +4,9 @@
 /* Variables */
 
 :root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
-  --color-start: #5b85b7;
+  --color-win: #13c628de;
+  --color-lose: #d60d0d;
+  --color-start: #2064b6;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
@@ -30,7 +30,9 @@ body {
   height: 100vh;
 }
 
-li, ol, ul {
+li,
+ol,
+ul {
   padding: 0;
   display: inline-block;
 }
@@ -61,8 +63,8 @@ button {
 }
 
 #btn__reset {
-	width: 200px;
-	margin: 0 auto;
+  width: 200px;
+  margin: 0 auto;
 }
 
 .main-container {
@@ -79,14 +81,14 @@ button {
   padding: 10px;
 }
 
-#phrase ul li{
+#phrase ul li {
   margin-top: 15px;
 }
 
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: #363d5dcb;
 }
 
 
@@ -111,7 +113,7 @@ button {
 
 .show {
   color: #fff;
-  background-color: #4ac0d5;
+  background-color: #216bd5e8;
   font-size: 20px;
   height: 65px;
   width: 65px;
@@ -138,7 +140,7 @@ button {
 }
 
 .wrong {
-  background: #f76b64;
+  background: #ff2b20cf;
   color: #FFFFFF;
 }
 
@@ -196,7 +198,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: #ff3232d0;
 }
 
 .lose a {
