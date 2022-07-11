@@ -24,7 +24,7 @@ The **`Phrase`** class contains these methods:
 * Checks a guessed letter for a match
 * Displays a correctly guessed letter in the phrase
 
-## Styling
+## Styling Updates
 The following styles were updated within **`style.css`**:
 * `:root`
     1. `--color-win` color was changed; added transparency
