@@ -1,5 +1,3 @@
-
-
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
@@ -7,13 +5,13 @@ class Phrase {
 
 
     /**
-     * Display blank box placeholders on page representing the characters in the phrase 
+     * Display hidden phrase
      */
     addPhraseToDisplay() {
         const chars = this.phrase.split('');
+        const ul = document.querySelector('#phrase ul');
 
-        // create a list item for each letter
-        const phraseUL = document.querySelector('#phrase ul');
+        // Create li for each letter
         chars.forEach(char => {
 
             const li = document.createElement('li');
@@ -28,13 +26,15 @@ class Phrase {
                 li.classList.add(char);
             }
             
-            phraseUL.appendChild(li);
+            ul.appendChild(li);
         })
     }
 
 
     /**
-     * Check to see if guessed letter matches any letter in the phrase 
+     * Check if phrase contains the guessed letter
+     * @param {string} letter the guessed letter from player input
+     * @returns {boolean} boolean value indicating yes/no match
      */
     checkLetter(letter) {
         const regex = new RegExp(`[${this.phrase}]`,'g');
@@ -44,13 +44,11 @@ class Phrase {
         
     
     /**
-     * Reveal all matched letters from player's selection
+     * Reveal any matched letters contained in the phrase
      */
     showMatchedLetter(matchedLetter) {
-        /** Show letters by replacing class 'hide' with 'show' */
         const phraseLetters = document.querySelectorAll('#phrase li');
 
-        // Add 'show' class to matched letter
         for (let letter of phraseLetters) {
             if (letter.textContent === matchedLetter) {
                 letter.classList.add('show');
